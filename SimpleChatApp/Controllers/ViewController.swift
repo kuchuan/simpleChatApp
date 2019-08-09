@@ -30,6 +30,35 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate  = self
         
+        //firestoreへの接続
+        let db = Firestore.firestore()
+        
+        
+        //コレクションroomが変更されたかどうかのを検知するリスナーを登録する
+        db.collection("room").addSnapshotListener { (querySnapshot, error) in
+            
+            //querySnapshot.documents:room内の全件を取得
+            guard let documents = querySnapshot?.documents else {
+                    //roomの中に何もないとき、処理を中断
+                    return
+            }
+            
+            //変数documentsにroomの全データがあるので、
+            //それを元に配列を作成し、画面を更新する
+            var results: [Room] = []
+            
+            for document in documents {
+                let roomName = document.get("name") as! String
+                let room = Room(name: roomName, documentId: document.documentID)
+                
+                results.append(room)
+            }
+            
+            //変数roomsを書き換える
+            self.rooms = results
+        }
+        
+        
     }
 
     //ルーム作成のボタンがクリックされたとき
