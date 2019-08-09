@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		483495C422FD06E800EC20E1 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483495C322FD06E800EC20E1 /* Message.swift */; };
+		483495C822FD081D00EC20E1 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483495C722FD081D00EC20E1 /* Room.swift */; };
 		4834D56922FBD16A00AEA180 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834D56822FBD16A00AEA180 /* AppDelegate.swift */; };
 		4834D56B22FBD16A00AEA180 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834D56A22FBD16A00AEA180 /* ViewController.swift */; };
 		4834D56E22FBD16A00AEA180 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4834D56C22FBD16A00AEA180 /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		483495C322FD06E800EC20E1 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		483495C722FD081D00EC20E1 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		4834D56522FBD16A00AEA180 /* SimpleChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4834D56822FBD16A00AEA180 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4834D56A22FBD16A00AEA180 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +69,7 @@
 		4834D56722FBD16A00AEA180 /* SimpleChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				48B1E01B22FD049700CB781E /* Objects */,
 				48B1E01A22FD034800CB781E /* Controllers */,
 				4834D56822FBD16A00AEA180 /* AppDelegate.swift */,
 				4834D56C22FBD16A00AEA180 /* Main.storyboard */,
@@ -83,6 +88,15 @@
 				48B1E01822FD032700CB781E /* RoomViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		48B1E01B22FD049700CB781E /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				483495C322FD06E800EC20E1 /* Message.swift */,
+				483495C722FD081D00EC20E1 /* Room.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 		69163678919B7B1824759588 /* Frameworks */ = {
@@ -219,8 +233,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				48B1E01922FD032700CB781E /* RoomViewController.swift in Sources */,
+				483495C422FD06E800EC20E1 /* Message.swift in Sources */,
 				4834D56B22FBD16A00AEA180 /* ViewController.swift in Sources */,
 				4834D56922FBD16A00AEA180 /* AppDelegate.swift in Sources */,
+				483495C822FD081D00EC20E1 /* Room.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
