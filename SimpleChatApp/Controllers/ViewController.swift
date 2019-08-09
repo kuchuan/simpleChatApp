@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var roomNamaTextField: UITextField!
+    @IBOutlet weak var roomNameTextField: UITextField!
     
     @IBOutlet weak var tableView: UITableView!
     //チャットのへ部屋一覧を保持する配列
@@ -33,17 +34,33 @@ class ViewController: UIViewController {
 
     //ルーム作成のボタンがクリックされたとき
     @IBAction func didClickButton(_ sender: UIButton) {
-        
-        //空文字だったら
-        if roomNameTextField.text?.isEmpty {
-            //テキストfieldが空文字の場合
-            //処理中断
+        if roomNameTextField.text!.isEmpty {
+            // テキストフィールドが空文字の場合
+            // 処理中断
             return
         }
         
-        //部屋の名前を変数に保存
-        let roomNeme = roomNamaTextField.text!
+        // 部屋の名前を変数に保存
+        let roomName = roomNameTextField.text!
         
+        // Firestoreの接続情報取得
+        let db = Firestore.firestore()
+        
+        // Firestoreに新しい部屋を追加
+        db.collection("room").addDocument(data: [
+            "name": roomName,
+            "createdAt": FieldValue.serverTimestamp()
+        ]) { err in
+            
+            if let err = err {
+                print("チャットルームの作成に失敗しました")
+                print(err)
+            } else {
+                print("チャットルームを作成しました：\(roomName)")
+            }
+        }
+        
+        roomNameTextField.text = ""
     }
 }
 
@@ -65,6 +82,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         //右矢印
         cell.accessoryType = .disclosureIndicator
+        
+        return cell
     }
     
     
