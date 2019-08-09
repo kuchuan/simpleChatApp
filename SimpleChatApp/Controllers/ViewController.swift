@@ -9,6 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var roomNamaTextfield: UITextField!
+    
+    @IBOutlet weak var tableVuew: UITableView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,5 +21,7 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func didClickButton(_ sender: UIButton) {
+    }
 }
 
