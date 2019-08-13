@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class RoomViewController: UIViewController {
     
@@ -38,9 +39,39 @@ class RoomViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        
     }
+    
+
     @IBAction func didClickButton(_ sender: UIButton) {
+        
+        //　文字が空がどうか
+        if messageTextField.text!.isEmpty {
+            //からの場合は処理中断
+            return
+        }
+        
+        //登録処理について
+        //画面に入力されたテキスト変数に保存
+        let message = messageTextField.text!
+        
+        //firestoreに接続
+        let db = Firestore.firestore()
+        
+        //メッセージをFirestoreに登録(選ばれた（まえの画面からSenderでdocumenteIdが送られている
+        db.collection("room").document(documenteId).collection("message").addDocument(data: [
+            "text": message,
+            "createdAt":FieldValue.serverTimestamp()
+        ]) { error in
+            
+            if let err = error {
+                print("メッセージの送信に失敗しました")
+                print(err)
+            } else {
+                print("メッセージを送信されました")
+            }
+        }
+        //メッセージの入力欄のを空にする
+        messageTextField.text = ""
     }
     
 
