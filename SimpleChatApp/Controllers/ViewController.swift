@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         // Firestoreの接続情報取得
         let db = Firestore.firestore()
         
-        // Firestoreに新しい部屋を追加
+        // Firestoreに新しい部屋を追加（roomがないと自動で作ってくれる！便利！）
         db.collection("room").addDocument(data: [
             "name": roomName,
             "createdAt": FieldValue.serverTimestamp()
@@ -115,6 +115,28 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    //didSelectRowAtはセルがクリックされたら
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let room = rooms[indexPath.row]
+        
+        // 選択を解除（グレーの色を元に戻す）
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        //つぎの画面へ遷移する
+        performSegue(withIdentifier: "toRoom", sender: room.documentId)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        //間違った画面に値を渡さないようにsegue.identifier
+        if segue.identifier == "toRoom" {
+            
+            let roomVC = segue.destination as! RoomViewController
+            roomVC.documenteId = sender as! String
+            
+        }
+    }
     
 }
 
