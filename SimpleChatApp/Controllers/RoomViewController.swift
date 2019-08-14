@@ -45,12 +45,12 @@ class RoomViewController: UIViewController {
         // Forestoreに摂津族
         let db = Firestore.firestore()
         
-        //選ばれた部屋の中のメッセージを感知
-        db.collection("room").document(documenteId).collection("message").addSnapshotListener { (querySnapshot, Error) in
+        //選ばれた部屋の中のメッセージを感知(order(by: "createdAt", descending: true)
+        db.collection("room").document(documenteId).collection("message").order(by: "createdAt", descending: true).addSnapshotListener { (querySnapshot, Error) in
 //                print("送信されました")
             
             //querySnapShotがもっているドキュメントを取得
-            guard let documents =  querySnapshot?.documents else {
+            guard let documents = querySnapshot?.documents else {
                 //取得したドキュメントが空の場合処理を中断
                 return
             }
@@ -67,12 +67,8 @@ class RoomViewController: UIViewController {
                 messages.append(message)
             }
             
-            //変数roomsを書き換える
+            //変数messagesを書き換える
             self.messages = messages
-            
-            //取得したドキュメントが空の場合処理を中断
-            
-            //取得したドキュメントを元に、画面を更新
             
         }
     }
