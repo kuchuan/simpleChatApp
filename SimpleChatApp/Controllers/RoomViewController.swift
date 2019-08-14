@@ -20,6 +20,7 @@ class RoomViewController: UIViewController {
     var documenteId = ""
     
     //選択された部屋で投稿されたメッセージを全件もつ配列
+    //プロパティを設けた･･･書き換わると実行される書式
     var  messages: [Message] = [] {
         //変数messageの値が変わったときに実行される
         didSet {
@@ -38,7 +39,42 @@ class RoomViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // Forestoreに摂津族
+        let db = Firestore.firestore()
         
+        //選ばれた部屋の中のメッセージを感知
+        db.collection("room").document(documenteId).collection("message").addSnapshotListener { (querySnapshot, Error) in
+//                print("送信されました")
+            
+            //querySnapShotがもっているドキュメントを取得
+            guard let documents =  querySnapshot?.documents else {
+                //取得したドキュメントが空の場合処理を中断
+                return
+            }
+            
+            //変数documentsに全データがあるので、
+            //それを元に配列を作成し、画面を更新する
+            var messages: [Message] = []
+            
+            for document in documents {
+                let documentId = document.documentID
+                let text = document.get("text") as! String
+                
+                let message = Message(documentId: documentId, text: text)
+                messages.append(message)
+            }
+            
+            //変数roomsを書き換える
+            self.messages = messages
+            
+            //取得したドキュメントが空の場合処理を中断
+            
+            //取得したドキュメントを元に、画面を更新
+            
+        }
     }
     
 

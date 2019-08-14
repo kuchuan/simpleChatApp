@@ -43,6 +43,7 @@ class ViewController: UIViewController {
                     return
             }
             
+            
             //変数documentsにroomの全データがあるので、
             //それを元に配列を作成し、画面を更新する
             var results: [Room] = []
@@ -126,7 +127,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         //つぎの画面へ遷移する
         performSegue(withIdentifier: "toRoom", sender: room.documentId)
     }
-    
+  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         //間違った画面に値を渡さないようにsegue.identifier
