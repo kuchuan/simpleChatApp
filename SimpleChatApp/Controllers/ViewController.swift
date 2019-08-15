@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     //チャットのへ部屋一覧を保持する配列
     var rooms: [Room] = [] {
-        // roomsが活気変わる
+        // roomsが書き変わる
         didSet {
             //テーブルを更新する
             tableView.reloadData()
